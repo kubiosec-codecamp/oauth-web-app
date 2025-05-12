@@ -204,6 +204,25 @@ def debug():
     token = token_data.get('token', {})
     userinfo = token_data.get('userinfo', {})
     
+    # Extract groups from token or userinfo
+    # Groups could be in different locations depending on the identity provider
+    groups = []
+    
+    # Check for groups in common locations
+    if 'cognito:groups' in userinfo:
+        groups = userinfo['cognito:groups']
+    elif 'groups' in userinfo:
+        groups = userinfo['groups']
+    elif 'id_token' in token and token.get('id_token_claims'):
+        id_token_claims = token.get('id_token_claims', {})
+        groups = id_token_claims.get('cognito:groups', id_token_claims.get('groups', []))
+    
+    # Store groups in a global variable for later use
+    app.config['USER_GROUPS'] = groups
+    
+    # Format groups for display
+    groups_str = json.dumps(groups, indent=2) if groups else "[]"
+    
     # Convert token to a formatted string for display
     token_str = json.dumps(token, indent=2) if token else "{}"
     userinfo_str = json.dumps(userinfo, indent=2) if userinfo else "{}"
@@ -292,6 +311,15 @@ def debug():
                             </svg>
                             Logout
                         </a>
+                    </div>
+                    
+                    <div class="card mb-4">
+                        <div class="card-header">
+                            <h5 class="mb-0">User Groups</h5>
+                        </div>
+                        <div class="card-body">
+                            <pre class="mb-0">{groups_str}</pre>
+                        </div>
                     </div>
                     
                     <div class="card mb-4">
