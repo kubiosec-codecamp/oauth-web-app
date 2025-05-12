@@ -87,7 +87,6 @@ Note: The application uses a self-signed SSL certificate for HTTPS. Your browser
 
 - **app.py**: Main application file containing routes and OAuth configuration
 - **info.py**: Blueprint for the OAuth educational information page
-- **creds.txt**: Contains credentials for the OAuth client (not included in version control)
 - **.gitignore**: Specifies files and directories that should be excluded from version control
 
 ## Usage
