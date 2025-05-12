@@ -46,7 +46,7 @@ venv\Scripts\activate
 Once your virtual environment is activated, install the required packages:
 
 ```bash
-pip install flask authlib requests
+pip install flask authlib requests openai
 ```
 
 This will install:
