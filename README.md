@@ -25,10 +25,10 @@ It's recommended to use a virtual environment to isolate the dependencies for th
 
 ```bash
 # Create a virtual environment
-python3 -m venv venv
+python3 -m .venv venv
 
 # Activate the virtual environment
-source venv/bin/activate
+source .venv/bin/activate
 ```
 
 #### On Windows:
@@ -57,6 +57,11 @@ This will install:
 ### 3. Set Environment Variables
 
 Before running the application, you need to set the following environment variables:
+
+### OpenAI API key
+```
+export OPENAI_API_KEY=xxxxxxxxxxxxx
+```
 
 #### On macOS/Linux:
 
